@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Store | Tech Excellence</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --neon-cyan: #00f2ff;
+            --neon-purple: #7000ff;
+            --dark-bg: #050a15;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            background: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at center, rgba(112, 0, 255, 0.15) 0%, transparent 70%);
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .btn-buy {
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+            border: none;
+            padding: 15px 40px;
+            color: white;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-buy:active {
+            transform: scale(0.95);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div style="font-size: 1.6rem; font-weight: 900;">FUTURE<span style="color:var(--neon-cyan)">STORE</span></div>
+        <div style="font-size: 1.2rem;">🛒</div>
+    </nav>
+
+    <div class="hero">
+        <h1>L'Élite Tech au Cameroun</h1>
+        <p style="opacity: 0.7;">Vitesse. Design. Futurisme.</p>
+    </div>
+
+    <div class="product-grid">
+        <div class="card">
+            <div style="font-size: 60px;">⚡</div>
+            <h3>Chargeur Quantum 200W</h3>
+            <p>Recharge complète en 15 minutes.</p>
+            <div class="price">25 000 CFA</div>
+            <button class="btn-buy" onclick="commander('Chargeur Quantum')">COMMANDER WHATSAPP</button>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 60px;">🕶️</div>
+            <h3>Lunettes AR-Vision</h3>
+            <p>Le futur devant vos yeux.</p>
+            <div class="price">85 000 CFA</div>
+            <button class="btn-buy" onclick="commander('Lunettes AR-Vision')">COMMANDER WHATSAPP</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Future Store Cameroun - Site Web Propulsé par GitHub
+    </footer>
+
+    <script>
+        // Fonction de commande WhatsApp
+        function commander(produit) {
+            const numero = "2376XXXXXXXX"; // REMPLACE PAR TON NUMÉRO
+            const texte = `Bonjour Future Store, je souhaite commander le produit : ${produit}`;
+            window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texte)}`, '_blank');
+        }
+
+        // Enregistrement du Service Worker (pour le mode installable)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker enregistré !'))
+                .catch(err => console.error('Échec enregistrement SW', err));
+            });
+        }
+    </script>
+</body>
+</html>
